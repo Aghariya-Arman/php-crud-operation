@@ -32,7 +32,7 @@
             </tr>
             <?php
             include 'connection.php';
-
+            //fetch data into database
             $sql = "select * from stud_data";
             $result = mysqli_query($conn, $sql);
             if ($result) {
@@ -44,8 +44,10 @@
                 $password = $row['password'];
                 $gender = $row['gender'];
 
+
                 echo '
       <tr>
+   
               <th scope="row">' . $id . '</th>
               <td>' . $name . '</td>
               <td>' . $lastname . '</td>

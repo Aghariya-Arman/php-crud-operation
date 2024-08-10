@@ -15,10 +15,11 @@
 <body>
   <?php
   include('connection.php');
+  //getting value from update side
   $id = $_GET['updateid'];
 
+  //show data in textbox
   $sql = "select * from stud_data where id=$id";
-
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
   $name = $row['firstname'];
@@ -28,6 +29,7 @@
   $gender = $row['gender'];
 
 
+  //update data code 
 
   if (isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -39,8 +41,8 @@
     $sql = "update stud_data set id=$id,firstname='$name',lastname='$last',email='$email',password='$password',gender='$gender' where id=$id";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-      header("location:display.php");
       echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+      header("location:display.php");
     } else {
       die(mysqli_error($conn));
     }
@@ -75,6 +77,8 @@
           </div>
 
           <div>
+            <!-- pass value and checked condition -->
+
             <label> Gender:- &nbsp; &nbsp; &nbsp;</label>
             <input type="radio" name="radio" id="option2" value="male" <?php echo $gender == 'male' ? 'checked="checked"' : ''; ?>>
             <label> Male</label>

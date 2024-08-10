@@ -1,4 +1,5 @@
 <?php
+// delete code 
 
 include 'connection.php';
 if (isset($_GET['deleteid'])) {
