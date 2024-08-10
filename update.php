@@ -76,20 +76,10 @@
 
           <div>
             <label> Gender:- &nbsp; &nbsp; &nbsp;</label>
-            <?php
-            if ($gender == 'male') { ?>
-
-              <input type="radio" name="radio" id="option2" value="male" checked>
-              <label> Male</label>
-              <input type="radio" name="radio" id="option2" value="female">
-              <label> FeMale</label>
-            <?php } else { ?>
-              <input type="radio" name="radio" id="option2" value="male">
-              <label> Male</label>
-              <input type="radio" name="radio" id="option2" value="female" checked>
-              <label> FeMale</label>
-            <?php } ?>
-
+            <input type="radio" name="radio" id="option2" value="male" <?php echo $gender == 'male' ? 'checked="checked"' : ''; ?>>
+            <label> Male</label>
+            <input type="radio" name="radio" id="option2" value="female" <?php echo $gender == 'female' ? 'checked="checked"' : ''; ?>>
+            <label> FeMale</label>
           </div>
           <div>
             <button type="submit" name="submit" class="btn btn-primary">Update</button>
