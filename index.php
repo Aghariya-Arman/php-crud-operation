@@ -22,8 +22,11 @@
     $email = $_POST['email'];
     $password = $_POST['pass'];
     $gender = $_POST['radio'];
+    //access checkbox
+    $lang = $_POST['language'];
+    $lang1 = implode(",", $lang);
 
-    $sql = "insert into stud_data (firstname,lastname,email,password,gender)values ('$name','$last','$email','$password','$gender')";
+    $sql = "insert into stud_data (firstname,lastname,email,password,gender,languages)values ('$name','$last','$email','$password','$gender','$lang1')";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       header("location:display.php");
@@ -40,7 +43,7 @@
     <div class="row">
 
       <div class="col-md-6 m-auto pt-5">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
 
           <div class="form-group">
             <h3>submit your data</h3>
@@ -67,7 +70,20 @@
             <input type="radio" name="radio" id="option2" value="female">
             <label> FeMale</label>
           </div>
-          <div>
+          <label>Languages know -:</label><br>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="Hindi">
+            <label class="form-check-label" for="check1">HINDI</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="English">
+            <label class="form-check-label" for="check1"> ENGLISH</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="Gujrati">
+            <label class="form-check-label" for="check1">GUJRATI</label>
+          </div>
+          <div><br>
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>

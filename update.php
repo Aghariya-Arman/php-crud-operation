@@ -27,6 +27,11 @@
   $email = $row['email'];
   $password = $row['password'];
   $gender = $row['gender'];
+  $language = $row['languages'];
+  $language1 = explode(",", $language);
+
+  // print_r($language);
+  // exit;
 
 
   //update data code 
@@ -37,11 +42,13 @@
     $email = $_POST['email'];
     $password = $_POST['pass'];
     $gender = $_POST['radio'];
+    $lang = $_POST['language'];
+    $lang1 = implode(",", $lang);
 
-    $sql = "update stud_data set id=$id,firstname='$name',lastname='$last',email='$email',password='$password',gender='$gender' where id=$id";
+    $sql = "update stud_data set id=$id,firstname='$name',lastname='$last',email='$email',password='$password',gender='$gender',languages='$lang1' where id=$id";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-      echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+      echo '<script>alert("update succesfully")</script>';
       header("location:display.php");
     } else {
       die(mysqli_error($conn));
@@ -85,7 +92,23 @@
             <input type="radio" name="radio" id="option2" value="female" <?php echo $gender == 'female' ? 'checked="checked"' : ''; ?>>
             <label> FeMale</label>
           </div>
-          <div>
+
+
+          <!-- checkbox -->
+          <label>Languages know -:</label><br>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="Hindi" <?php if (in_array("Hindi", $language1)) echo "checked"; ?>>
+            <label class="form-check-label" for="check1">HINDI</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="English" <?php if (in_array("English", $language1)) echo "checked"; ?>>
+            <label class="form-check-label" for="check1"> ENGLISH</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="Gujrati" <?php if (in_array("Gujrati", $language1)) echo "checked"; ?>>
+            <label class="form-check-label" for="check1">GUJRATI</label>
+          </div>
+          <div><br>
             <button type="submit" name="submit" class="btn btn-primary">Update</button>
           </div>
         </form>
