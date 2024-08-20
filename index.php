@@ -26,7 +26,13 @@
     $lang = $_POST['language'];
     $lang1 = implode(",", $lang);
 
-    $sql = "insert into stud_data (firstname,lastname,email,password,gender,languages)values ('$name','$last','$email','$password','$gender','$lang1')";
+    //access img
+    $filename = $_FILES["uploadimg"]["name"];
+    $tempname = $_FILES["uploadimg"]["tmp_name"];
+    $folder = "image/" . $filename;
+    move_uploaded_file($tempname, $folder);
+
+    $sql = "insert into stud_data (firstname,lastname,email,password,gender,languages,image)values ('$name','$last','$email','$password','$gender','$lang1','$filename')";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       header("location:display.php");
@@ -82,6 +88,11 @@
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="Gujrati">
             <label class="form-check-label" for="check1">GUJRATI</label>
+          </div>
+          <br>
+          <div class="div">
+            <label>Choose your file:-&nbsp;</label>
+            <input type="file" name="uploadimg">
           </div>
           <div><br>
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>

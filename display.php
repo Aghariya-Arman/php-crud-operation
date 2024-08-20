@@ -18,7 +18,7 @@
   <div class="container">
     <button class="btn btn-primary my-5"><a href="index.php" class="text-light">Add User</a></button>
     <div class="row">
-      <div class="col-md-11 m-auto pt-5">
+      <div class="col-md-12 m-auto pt-5">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -29,6 +29,7 @@
               <th scope="col">password</th>
               <th scope="col">gender</th>
               <th scope="col">Language</th>
+              <th scope="col">images</th>
               <th scope="col">Action</th>
             </tr>
             <?php
@@ -45,6 +46,8 @@
                 $password = $row['password'];
                 $gender = $row['gender'];
                 $language = $row['languages'];
+                // $img = $row['image'];
+
 
 
                 echo '
@@ -57,6 +60,7 @@
               <td>' . $password . '</td>
               <td>' . $gender . '</td>
               <td>' . $language . '</td>
+              <td><img src="image/' . $row['image'] . '"alt="image" height="20px" width="50"</td>
               <td>
               <button class="btn btn-primary"><a href="update.php?updateid=' . $id . '" class="text-light">update</a></button>
                 <button class="btn btn-danger"><a href="delete.php?deleteid=' . $id . '" class="text-light" >delete</a></button>

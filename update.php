@@ -29,9 +29,10 @@
   $gender = $row['gender'];
   $language = $row['languages'];
   $language1 = explode(",", $language);
-
-  // print_r($language);
+  $image = $row['image'];
+  // print_r($image);
   // exit;
+
 
 
   //update data code 
@@ -42,10 +43,25 @@
     $email = $_POST['email'];
     $password = $_POST['pass'];
     $gender = $_POST['radio'];
+    // checkbox
     $lang = $_POST['language'];
     $lang1 = implode(",", $lang);
 
-    $sql = "update stud_data set id=$id,firstname='$name',lastname='$last',email='$email',password='$password',gender='$gender',languages='$lang1' where id=$id";
+    //image
+    $filename = $_FILES['uploadimg']['name'];
+    $tempname = $_FILES['uploadimg']['tmp_name'];
+    $folder = "image/" . $filename;
+    move_uploaded_file($tempname, $folder);
+
+    // $oldimage = $_POST['old_img'];
+
+    // if ($newimage == null) {
+    //   $newimage = $_FILES['uploadimg']['name'];
+    // } else {
+    //   $newimage = $oldimage;
+    // }
+
+    $sql = "update stud_data set id=$id,firstname='$name',lastname='$last',email='$email',password='$password',gender='$gender',languages='$lang1',image='$filename' where id=$id";
     $result = mysqli_query($conn, $sql);
     if ($result) {
       echo '<script>alert("update succesfully")</script>';
@@ -63,7 +79,7 @@
     <div class="row">
 
       <div class="col-md-6 m-auto pt-5">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
 
           <div class="form-group">
             <h3>submit your data</h3>
@@ -108,7 +124,18 @@
             <input type="checkbox" class="form-check-input" id="check1" name="language[]" value="Gujrati" <?php if (in_array("Gujrati", $language1)) echo "checked"; ?>>
             <label class="form-check-label" for="check1">GUJRATI</label>
           </div>
-          <div><br>
+
+          <!-- IMAGE DISPLAY -->
+          <div class="div">
+            <label>Choose your file:-&nbsp;</label>
+            <input type="file" name="uploadimg">
+            <input type="hidden" name="old_img" value="<?php $row['image']; ?>">
+
+          </div>
+
+
+          <br>
+          <div>
             <button type="submit" name="submit" class="btn btn-primary">Update</button>
           </div>
         </form>
